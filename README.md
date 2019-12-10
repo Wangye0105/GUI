@@ -11,16 +11,18 @@
 >>student2（文件夹）
 >>>Students（文件夹）  
 
-如下图片所示：   
+### 如下图片所示：   
 #### 所有身份会存放到不同的身份文件夹中，以便之后选择，而身份的选择是通过下拉菜单选择的  
-<img src="https://github.com/Wangye0105/imageJava/blob/master/%E6%B3%A8%E5%86%8C%E8%BA%AB%E4%BB%BD%E9%80%89%E6%8B%A9.png"  >  
-<img src="https://github.com/Wangye0105/imageJava/blob/master/flodsample.png"  width=700 >  
-# 少一张图在这 少一张每个学生有一个文件夹  
-#### 每个用户以自身number命名，为了确保number不重复，用关键字static修饰
+<img src="https://github.com/Wangye0105/imageJava/blob/master/%E6%B3%A8%E5%86%8C%E8%BA%AB%E4%BB%BD%E9%80%89%E6%8B%A9.png">  
+
+<img src="https://github.com/Wangye0105/imageJava/blob/master/flodsample.png"  width=700 > 
+#### 每个用户以自身number命名，为了确保number不重复，用关键字static修饰  <br>
+<img src="https://github.com/Wangye0105/imageJava/blob/master/%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2.png"  width=700 >  
+   
 #### 用户的所有的资料都会存放在自己的文件夹中，会有info（详细信息），还有已选课程  
 <img src="https://github.com/Wangye0105/imageJava/blob/master/txtstore.png"  width=700 >  
 #### 这里是用户详细信息的存储信息，之后会用io流取出，再用正则表达式获取相应信息    
-<img src="https://github.com/Wangye0105/imageJava/blob/master/txtsample.png"   >  
+<img src="https://github.com/Wangye0105/imageJava/blob/master/txtsample.png">  
 其中确保相对路径存在，用递归方法逐层建立  
 ```jave
  String path_all = "GUI\\"+"crouse"+"\\cro"+_number; //通过身份确定文件夹路径
@@ -285,5 +287,47 @@ public class StudentPage extends JFrame{
       }});
 		
 ```
-## 界面展示  
+#  界面展示  
+###  登录界面  
+<img src="https://github.com/Wangye0105/imageJava/blob/master/%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2.png">  
+其中console中会打印出详细信息，并且提供与储存信息是否一致  
+<img src="https://github.com/Wangye0105/imageJava/blob/master/%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81%E5%AF%86%E7%A0%81.png">  
+###  注册界面  
+<img src="https://github.com/Wangye0105/imageJava/blob/master/%E6%B3%A8%E5%86%8C%E8%BA%AB%E4%BB%BD%E9%80%89%E6%8B%A9.png">  
+如果两次密码不一样会提示错误，并自动清除密码栏，要求重新填写  
+<img src="https://github.com/Wangye0105/imageJava/blob/master/%E6%B3%A8%E5%86%8C%E5%AF%86%E7%A0%81%E7%9B%B8%E5%90%8C.png">  
+相应的简单清空代码和密码正确机制  
+
+```
+if(!strPwd.equals(strPwd2)) {  
+	                JOptionPane.showMessageDialog(null,"Passwords are inconsistent twice");
+	                pw.setText(null);  //清空
+	                pw2.setText(null);
+	                return; 
+				}
+				
+```  
+
+注册成果后 便会将信息自动以txt格式生成文件  
+<img src="https://github.com/Wangye0105/imageJava/blob/master/%E6%B3%A8%E5%86%8C%E6%88%90%E6%9E%9C%E5%90%8E%E8%87%AA%E5%8A%A8%E7%94%9F%E4%BA%A7%E6%96%87%E4%BB%B6.png" width=700>
+###  详细界面  
+在登陆成功后，会根据身份的不同进入不同身份的操作界面，这里用老师的来演示  
+<img src="https://github.com/Wangye0105/imageJava/blob/master/%E7%99%BB%E9%99%86%E6%88%90%E5%8A%9F%E5%90%8E%E7%9A%84%E6%95%99%E5%B8%88%E7%95%8C%E9%9D%A2.png"> 
+老师会的add 是增加课程的按钮，这里与学生的add摁键不一样，用了不一样的事件  
+all按键时查看所有信息按键，当老师添加完课程后，学生便可以查看到
+<img src="https://github.com/Wangye0105/imageJava/blob/master/%E5%AD%A6%E7%94%9F%E5%92%8C%20%E6%95%99%E5%B8%88%E7%9A%84add%E7%95%8C%E9%9D%A2.png">  
+<img src="https://github.com/Wangye0105/imageJava/blob/master/add%E4%B9%8B%E5%90%8E%E7%9A%84%E4%BF%A1%E6%81%AF%E5%AD%98%E5%82%A8.png">
+而老师添加的课程会在course文件夹中存放，同时也会在老师自己的文件夹中存放，当老师不该授课老师的时候便默认为自己，如果更改授课老师，便会存放到该授课老师的文件中。  
+而管理员界面便是通过这一方法为老师们添加课程信息。  
+
+###  退选界面   
+这里可以看到当学生退课或老师退课时，界面所发生的变化，以及自己的文件夹中的变化，这里用学生来举例：  
+退课之后界面发生的变化：  
+<img src="https://github.com/Wangye0105/imageJava/blob/master/drop%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%90%8E%E7%9A%84%E4%BF%A1%E6%81%AF.png">  
+
+退课之后文件夹中的变化：  
+<img src="https://github.com/Wangye0105/imageJava/blob/master/drop%E4%B9%8B%E5%90%8E%E7%9A%84.png">  
+不难发现文件夹中cro1的文件被清除  
+
+#  end~
 
